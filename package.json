@@ -27,6 +27,7 @@
     "mocha": "^2.1.0"
   },
   "dependencies": {
-    "rocambole-token": "^1.2.1"
+    "rocambole-token": "^1.2.1",
+    "unquoted-property-validator": "^1.0.0"
   }
 }
