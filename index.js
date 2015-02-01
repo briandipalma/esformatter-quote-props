@@ -1,6 +1,5 @@
 'use strict';
 
-var tk = require('rocambole-token');
 var unquotedValidator = require('unquoted-property-validator');
 
 module.exports.nodeBefore = function(node) {
