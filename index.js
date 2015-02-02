@@ -6,13 +6,8 @@ module.exports.nodeBefore = function(node) {
 	if (isQuotedProperty(node) && isSafeToUnquote(node)) {
 		unquoteProperty(node);
 	}
-//
-//	if (node.type === 'Identifier' && node.parent.type === 'Property' && node.parent.key === node) {
-//		console.log(node);
-//	}
 };
 
-// A literal who's parent is type Property and who's key is the node parameter
 function isQuotedProperty(node) {
 	return node.type === 'Literal' && node.parent.type === 'Property' && node.parent.key === node;
 }
