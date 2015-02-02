@@ -20,9 +20,9 @@ mocha.describe('quote props plugin', function() {
 		var formattedCode = esformatter.format(codeStr);
 
 		// Then.
-		assert.equal(formattedCode, "var obj = {\n" +
+		assert.equal(formattedCode, 'var obj = {\n' +
 			"  dropDown: 'setField'\n" +
-		"}");
+		'}');
 	});
 
 	mocha.it('should remove quotes in compound data', function() {
@@ -40,13 +40,13 @@ mocha.describe('quote props plugin', function() {
 		var formattedCode = esformatter.format(codeStr);
 
 		// Then.
-		assert.equal(formattedCode, "var obj = {\n" +
+		assert.equal(formattedCode, 'var obj = {\n' +
 			"  dropDown: 'setField',\n" +
 			"  button: 'clickButton',\n" +
 			"  field: 'setField',\n" +
 			"  fields: 'setField',\n" +
 			"  hybridField: 'setField',\n" +
 			"  state: 'setState'\n" +
-		"}");
+		'}');
 	});
 });
