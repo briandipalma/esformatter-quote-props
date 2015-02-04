@@ -13,7 +13,9 @@ function isQuotedProperty(node) {
 }
 
 function isSafeToUnquote(node) {
-	return true;
+	var results = unquotedValidator(node.value);
+
+	return results.needsQuotes === false;
 }
 
 function unquoteProperty(node) {
