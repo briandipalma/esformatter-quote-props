@@ -49,4 +49,21 @@ mocha.describe('quote props plugin', function() {
 			"  state: 'setState'\n" +
 		'}');
 	});
+
+	mocha.it('should remove quotes in mixed compound data', function() {
+		// Given.
+		var codeStr = "var t = {\
+			'subject': subject,\
+			data: null\
+		};";
+
+		// When.
+		var formattedCode = esformatter.format(codeStr);
+
+		// Then.
+		assert.equal(formattedCode, 'var t = {\n' +
+			'  subject: subject,\n' +
+			'  data: null\n' +
+		'};');
+	});
 });
