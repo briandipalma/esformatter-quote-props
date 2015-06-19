@@ -1,6 +1,6 @@
 {
   "name": "esformatter-quote-props",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "esformatter plugin to toggle quotes on properties",
   "main": "index.js",
   "scripts": {
