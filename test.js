@@ -1,33 +1,31 @@
-'use strict';
+const assert = require('assert');
 
-var assert = require('assert');
+const mocha = require('mocha');
+const esformatter = require('esformatter');
 
-var mocha = require('mocha');
-var esformatter = require('esformatter');
-
-var quotePropsPlugin = require('./');
+const quotePropsPlugin = require('./');
 
 esformatter.register(quotePropsPlugin);
 
-mocha.describe('quote props plugin', function() {
-	mocha.it('should remove quotes around properties', function() {
+mocha.describe('quote props plugin', () => {
+	mocha.it('should remove quotes around properties', () => {
 		// Given.
-		var codeStr = "var obj = {\
+		const codeStr = "const obj = {\
 			'dropDown': 'setField'\
 		}";
 
 		// When.
-		var formattedCode = esformatter.format(codeStr);
+		const formattedCode = esformatter.format(codeStr);
 
 		// Then.
-		assert.equal(formattedCode, 'var obj = {\n' +
+		assert.equal(formattedCode, 'const obj = {\n' +
 			"  dropDown: 'setField'\n" +
 		'}');
 	});
 
-	mocha.it('should remove quotes in compound data', function() {
+	mocha.it('should remove quotes in compound data', () => {
 		// Given.
-		var codeStr = "var obj = {\
+		const codeStr = "const obj = {\
 			'dropDown': 'setField',\
 			'button': 'clickButton',\
 			'field': 'setField',\
@@ -37,10 +35,10 @@ mocha.describe('quote props plugin', function() {
 		}";
 
 		// When.
-		var formattedCode = esformatter.format(codeStr);
+		const formattedCode = esformatter.format(codeStr);
 
 		// Then.
-		assert.equal(formattedCode, 'var obj = {\n' +
+		assert.equal(formattedCode, 'const obj = {\n' +
 			"  dropDown: 'setField',\n" +
 			"  button: 'clickButton',\n" +
 			"  field: 'setField',\n" +
@@ -50,33 +48,33 @@ mocha.describe('quote props plugin', function() {
 		'}');
 	});
 
-	mocha.it('should remove quotes in mixed compound data', function() {
+	mocha.it('should remove quotes in mixed compound data', () => {
 		// Given.
-		var codeStr = "var t = {\
+		const codeStr = "const t = {\
 			'subject': subject,\
 			data: null,\
             777: true\
 		};";
 
 		// When.
-		var formattedCode = esformatter.format(codeStr);
+		const formattedCode = esformatter.format(codeStr);
 
 		// Then.
-		assert.equal(formattedCode, 'var t = {\n' +
+		assert.equal(formattedCode, 'const t = {\n' +
 			'  subject: subject,\n' +
 			'  data: null,\n' +
             '  777: true\n' +
 		'};');
 	});
 
-	mocha.it('should handle null computed properties', function() {
+	mocha.it('should handle null computed properties', () => {
 		// Given.
-		var codeStr = 'const data = {\
+		const codeStr = 'const data = {\
 			[null]: {}\
 		};';
 
 		// When.
-		var formattedCode = esformatter.format(codeStr);
+		const formattedCode = esformatter.format(codeStr);
 
 		// Then.
 		assert.equal(formattedCode, 'const data = {\n' +
