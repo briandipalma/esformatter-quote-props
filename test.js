@@ -68,4 +68,19 @@ mocha.describe('quote props plugin', function() {
             '  777: true\n' +
 		'};');
 	});
+
+	mocha.it('should handle null computed properties', function() {
+		// Given.
+		var codeStr = 'const data = {\
+			[null]: {}\
+		};';
+
+		// When.
+		var formattedCode = esformatter.format(codeStr);
+
+		// Then.
+		assert.equal(formattedCode, 'const data = {\n' +
+			'  [null]: {}\n' +
+		'};');
+	});
 });

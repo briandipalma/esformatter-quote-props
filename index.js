@@ -1,8 +1,6 @@
-'use strict';
+const unquotedValidator = require('unquoted-property-validator');
 
-var unquotedValidator = require('unquoted-property-validator');
-
-module.exports.nodeBefore = function(node) {
+module.exports.nodeBefore = function nodeBefore(node) {
 	if (isQuotedProperty(node) && isSafeToUnquote(node)) {
 		unquoteProperty(node);
 	}
@@ -12,22 +10,15 @@ function isQuotedProperty(node) {
 	return node.type === 'Literal' && node.parent.type === 'Property' && node.parent.key === node;
 }
 
-function ensureString(value) {
-    if (Object.prototype.toString.call(value) !== '[object String]') {
-        return value.toString();
-    }
-
-    return value;
-}
-
 function isSafeToUnquote(node) {
-	var results = unquotedValidator(ensureString(node.value));
+	const nodeValue = String(node.value);
+	const results = unquotedValidator(nodeValue);
 
 	return results.needsQuotes === false;
 }
 
 function unquoteProperty(node) {
-	var block = {
+	const block = {
 		name: node.value,
 		range: node.range,
 		type: 'Identifier',
